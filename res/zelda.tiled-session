@@ -3,20 +3,24 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "first-level.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "first-level.tmx": {
             "scale": 3.82375,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 80.15691402419091,
-                "y": 79.5031055900621
+                "x": 169.07486106570775,
+                "y": 79.63386727688788
             }
         },
         "first-level.tmx#Base2": {
+            "scaleInDock": 1
+        },
+        "tileset.tsx": {
             "scaleInDock": 1
         }
     },
@@ -27,6 +31,7 @@
     "map.tileWidth": 16,
     "map.width": 10,
     "openFiles": [
+        "first-level.tmx"
     ],
     "project": "zelda.tiled-project",
     "recentFiles": [

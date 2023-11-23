@@ -1,6 +1,34 @@
 import * as ex from 'excalibur';
+//import { Vector }  from 'excalibur/build/dist/Math/vector';
 import { Resources, loader } from './resources';
 import { Player } from './player';
+
+// Adiciona o evento para detectar a mudança de orientação retrato/paisagem
+window.addEventListener('orientationchange', () => {
+    adjustScreenSize();
+});
+
+// Função para ajustar o tamanho da tela com base na orientação
+function adjustScreenSize() {
+    const isPortrait = window.innerHeight > window.innerWidth;
+    /*
+    if (isPortrait) {
+        game.screen.wi = 600;
+
+        game.setResolution({
+            width: 600, // Ajuste o valor conforme necessário para a orientação portrait
+            height: 800,
+            strategy: ex.ResolutionStrategy.NoScale,
+        });
+    } else {
+        game.setResolution({
+            width: 800,
+            height: 600,
+            strategy: ex.ResolutionStrategy.NoScale,
+        });
+    }
+    */
+}
 
 const game = new ex.Engine({
     width: 800,
@@ -8,6 +36,8 @@ const game = new ex.Engine({
     canvasElementId: 'game',
     antialiasing: false
 });
+
+//adjustScreenSize();
 
 game.start(loader).then(() => {
     const objects = Resources.TiledMap.data.getObjectLayerByName("Objects");
