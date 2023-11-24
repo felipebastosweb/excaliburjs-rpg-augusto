@@ -1,8 +1,12 @@
 import * as ex from 'excalibur';
 import { Resources } from './resources';
 import { Config } from './config';
+import { Bullet } from './bullet';
+
 
 export class Player extends ex.Actor {
+    private holdingBullet: Bullet | null = null;
+
     constructor(pos: ex.Vector) {
         super({
             pos,
@@ -126,5 +130,22 @@ export class Player extends ex.Actor {
             this.graphics.use('down-walk');
         }
 
+        // Lógica para pegar a pedra quando há uma colisão
+        const bullets = engine.currentScene.actors.filter(actor => actor instanceof Bullet) as Bullet[];
+
+        for (const bullet of bullets) {
+            if (this.collidesWith(bullet) && !this.holdingBullet) {
+                this.holdingBullet = bullet;
+                bullet.kill(); // Remover a pedra do cenário
+            }
+        }
+
+        // Lógica para lançar a pedra
+        if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space) && this.holdingBullet) {
+            const mousePos = engine.input.pointers.primary.lastWorldPos;
+            const dir = mousePos.sub(this.pos).normalize();
+            this.holdingBullet.vel = dir.scale(this.holdingBullet.initialSpeed);
+            this.holdingBullet = null;
+        }
     }
 }
