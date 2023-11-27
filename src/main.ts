@@ -11,9 +11,10 @@ window.addEventListener('orientationchange', () => {
 // Função para ajustar o tamanho da tela com base na orientação
 function adjustScreenSize() {
     const isPortrait = window.innerHeight > window.innerWidth;
+    //game.set
     /*
     if (isPortrait) {
-        game.screen.wi = 600;
+        game.screen.width = 600;
 
         game.setResolution({
             width: 600, // Ajuste o valor conforme necessário para a orientação portrait

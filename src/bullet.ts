@@ -2,6 +2,7 @@
 import * as ex from 'excalibur';
 
 export class Bullet extends ex.Actor {
+    private initialPosition : ex.Vector;
     private initialSpeed: number;
     private minSpeed: number = 10;
 
@@ -13,7 +14,7 @@ export class Bullet extends ex.Actor {
             color: ex.Color.Red,
             collisionType: ex.CollisionType.Active
         });
-
+        this.initialPosition = this.pos;
         this.vel = dir.normalize().scale(initialSpeed);
         this.initialSpeed = initialSpeed;
     }
@@ -21,7 +22,10 @@ export class Bullet extends ex.Actor {
     onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
         // Reduzir gradualmente a velocidade até um mínimo
         this.vel = this.vel.scale(0.95);
-        if (this.vel.magnitude() < this.minSpeed) {
+        //this.vel.clampMagnitude
+        const distance = this.pos.distance(this.initialPosition);
+        //if (this.vel.magnitude() < this.minSpeed) {
+        if (distance < this.minSpeed) {
             this.vel = ex.Vector.Zero;
             // a pedra deve ficar parada no cenário até que o Player a pegue
             //this.kill(); // Remover a pedra quando a velocidade for mínima
